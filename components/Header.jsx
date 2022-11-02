@@ -17,7 +17,7 @@ export default function Header({ isAuthorVersion, host }) {
     <header className="header">
       <div className="content">
         <div className="left">
-          <Image src={"/wknd-logo-dk.svg"} alt="logo" height={36} width={"100%"} className="logo" />
+          <Image src={"/wknd-logo-dk.svg"} alt="logo2" height={36} width={80} className="logo" />
         </div>
 
         <div className="middle">

@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import ErrorComponent from "../components/ErrorComponent";
-import { fetchAndSetData } from "../components/utils";
+import { fetchAndSetData, downloadData } from "../components/utils";
 import Page from "../components/Page";
 
-export default function Graphiql(props) {
-  const [desktopData, setDesktopData] = useState(null);
-  const [mobileData, setMobileData] = useState(null);
-  const [isAuthorVersion, setIsAuthorVersion] = useState(false);
-  const [fetchError, setFetchError] = useState(null);
-  const [customHost, setCustomHost] = useState("");
+export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
+
+  return !desktopData && !mobileData ? (
+    fetchError ? (
+      <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
+    ) : null
+  ) : (
+    <Page desktopData={desktopData} mobileData={desktopData} isAuthorVersion={isAuthorVersion} host={customHost} />
+  );
+}
+
+//switch between static and server side rendering
+export async function getStaticProps() {
+//export async function getServerSideProps() {
 
   const hostConfig = {
     authorHost: "https://author-p81252-e700817.adobeaemcloud.com",
@@ -16,28 +24,14 @@ export default function Graphiql(props) {
     endpoint: "sample-wknd-app/homepage",
   };
 
-  useEffect(() => {
-    const setStates = { setIsAuthorVersion, setFetchError, setCustomHost };
-    const fetchVariations = [
-      {
-        variationName: "desktop",
-        setData: setDesktopData,
-      },
-      {
-        variationName: "mobile",
-        setData: setMobileData,
-      },
-    ];
-    fetchAndSetData(hostConfig, setStates, fetchVariations);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  let props = {
+    desktopData: await downloadData(hostConfig),
+    mobileData: null, 
+    isAuthorVersion: false, 
+    customHost: "https://publish-p81252-e700817.adobeaemcloud.com/", 
+    fetchError: null
+  };
 
-  return !desktopData && !mobileData ? (
-    fetchError ? (
-      <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
-    ) : null
-  ) : (
-    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
-  );
+  return {props};
 }

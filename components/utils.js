@@ -1,4 +1,6 @@
 import AEMHeadless from '@adobe/aem-headless-client-js';
+import getLocalStaticData from './data';
+import fetch from 'node-fetch';
 
 export const scrollToId = id => {
   if (!id.startsWith("#")) {
@@ -34,13 +36,21 @@ const tryFetch = async (AEMHeadless, host, endpoint, variation, setState, isAuth
   }
 };
 
-const getData = async (variation, setStates, hostConfig, authorHost, publishHost, endpoint, AEMHeadless) => {
+async function getData(variation, setStates, hostConfig, authorHost, publishHost, endpoint, AEMHeadless) {
   const { setData, setIsAuthorVersion, setFetchError, setCustomHost } = setStates;
+
+  // setData(getLocalStaticData().data.pageByPath.item);
+  // setCustomHost(publishHost);
+  // setIsAuthorVersion(false);
+
+  // return;
+
+
   // tryFetch() will return a truthy value if the fetch is successful
   let fetchWasSuccessful = null;
 
   const arr = [
-    {host: authorHost, isAuthor: true},
+    // {host: authorHost, isAuthor: true},
     {host: publishHost, isAuthor: false},
   ]
 
@@ -62,38 +72,39 @@ const getData = async (variation, setStates, hostConfig, authorHost, publishHost
 };
 
 
-export const fetchAndSetData = (hostConfig, setStates, fetchVariations) => {
+function fetchAndSetData(hostConfig, setStates, fetchVariations) {
   // initializing AEM headless here for later
-  const aemHeadlessClient = new AEMHeadless({ serviceUrl: "" });
+  const aemHeadlessClient = new AEMHeadless({ serviceUrl: "", fetch: fetch });
+
 
   // get queryparams and replace with default if it's not present
-  const urlParams = new URLSearchParams(window.location.search);
-  let authorHost = urlParams.get("authorHost");
-  if (!authorHost) {
-    authorHost = hostConfig.authorHost;
-  }
+  // const urlParams = new URLSearchParams(window.location.search);
+  // let authorHost = urlParams.get("authorHost");
+  // if (!authorHost) {
+  let authorHost = hostConfig.authorHost;
+  //}
   if (!authorHost?.endsWith("/")) {
     authorHost = authorHost + "/";
   }
 
-  let publishHost = urlParams.get("publishHost");
-  if (!publishHost) {
-    publishHost = hostConfig.publishHost;
-  }
+  // let publishHost = urlParams.get("publishHost");
+  // if (!publishHost) {
+  let publishHost = hostConfig.publishHost;
+  //}
   if (!publishHost?.endsWith("/")) {
     publishHost = publishHost + "/";
   }
 
-  let endpoint = urlParams.get("endpoint");
-  if (!endpoint) {
-    endpoint = hostConfig.endpoint;
-  }
+  // let endpoint = urlParams.get("endpoint");
+  // if (!endpoint) {
+  let endpoint = hostConfig.endpoint;
+  // }
   if (endpoint?.startsWith("/")) {
     endpoint = endpoint.substring(1);
   }
 
-  fetchVariations.forEach((fetchVariation) => {
-    getData(
+  fetchVariations.forEach(async (fetchVariation) => {
+    await getData(
       fetchVariation.variationName,
       {setData: fetchVariation.setData, ...setStates},
       hostConfig,
@@ -103,4 +114,36 @@ export const fetchAndSetData = (hostConfig, setStates, fetchVariations) => {
       aemHeadlessClient,
     )
   })
+}
+
+
+export { fetchAndSetData };
+
+export async function downloadData(hostConfig) {
+  // initializing AEM headless here for later
+  
+
+  let authorHost = hostConfig.authorHost;
+  if (!authorHost?.endsWith("/")) {
+    authorHost = authorHost + "/";
+  }
+  let publishHost = hostConfig.publishHost;
+  if (!publishHost?.endsWith("/")) {
+    publishHost = publishHost + "/";
+  }
+  let endpoint = hostConfig.endpoint;
+  if (endpoint?.startsWith("/")) {
+    endpoint = endpoint.substring(1);
+  }
+
+  const aemHeadlessClient = new AEMHeadless({ endpoint: publishHost, serviceURL: publishHost, fetch: fetch }); 
+
+  // get data from AEM graphql call at endpoint, causes error if fetch fails
+  const response = await aemHeadlessClient.runPersistedQuery(
+    endpoint,
+    { variation: "desktop", timestamp: Date.now() },
+    { credentials: "include" }
+  );
+
+  return response.data.pageByPath.item;
 }
