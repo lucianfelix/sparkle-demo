@@ -9,7 +9,7 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
       <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
     ) : null
   ) : (
-    <Page desktopData={desktopData} mobileData={desktopData} isAuthorVersion={isAuthorVersion} host={customHost} />
+    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
   );
 }
 
