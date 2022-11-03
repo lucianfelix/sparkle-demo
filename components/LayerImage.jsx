@@ -1,4 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
+/* xxxxeslint-disable @next/next/no-img-element */
+
+import Image from 'next/image'
 
 export default function LayerImage({ data, panelNr, host }) {
   const { image, altText, layerId, id, overflow, basePosition, debug, fit, forceLoad } = data;
@@ -13,14 +15,15 @@ export default function LayerImage({ data, panelNr, host }) {
           overflow ? "showOverflow" : "hideOverflow"
         }`}
       >
-        <img
+        <Image
           id={id}
-          loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
+          src={source}
           className="image"
+          alt={altText?.plaintext}
           width={image?.width}
           height={image?.height}
-          src={source}
-          alt={altText?.plaintext}
+          priority={panelNr === 0 ? true : false}
+          // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
       </div>
     </div>
