@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { scrollToId } from "./utils";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const DropdownIcon = () => (
   <svg className="dropdownIcon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 18 18" width="18">
@@ -93,7 +94,7 @@ export default function MobileHeader({ maxWidth, isAuthorVersion, host, mobileNa
         </button>
 
         {/* eslint-expect-error-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={"/wknd-logo-dk.svg"}
           alt="logo"
           height={22}
@@ -102,7 +103,7 @@ export default function MobileHeader({ maxWidth, isAuthorVersion, host, mobileNa
         />
 
         <a className="profileIconWrapper">
-          <img className="menuProfileIcon" src={"/stacey-roswells.webp"} width={42} height={42} alt="profile picture" />
+          <Image className="menuProfileIcon" src={"/stacey-roswells.webp"} width={42} height={42} alt="profile picture" />
         </a>
       </div>
 
@@ -151,7 +152,7 @@ export default function MobileHeader({ maxWidth, isAuthorVersion, host, mobileNa
             <span>{isAuthorVersion ? "my account" : "login"}</span>
           </a>
 
-          {isAuthorVersion && <img src={"/stacey-roswells.webp"} width={40} height={40} alt="profile picture" />}
+          {isAuthorVersion && <Image src={"/stacey-roswells.webp"} width={40} height={40} alt="profile picture" />}
         </div>
       </menu>
     </header>

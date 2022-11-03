@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 
 export default function Background({ backgroundProps, lazy, host }) {
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
@@ -8,7 +8,8 @@ export default function Background({ backgroundProps, lazy, host }) {
   return (
     <div className={`backgroundWrapper ${isVideo ? "isVideo" : ""}`} style={{ backgroundColor: color, zIndex }}>
       {backgroundContent?.type === "image" && (
-        <img src={source} alt={altText} className="backgroundImage" loading={lazy ? "lazy" : "eager"} />
+        <Image src={source} alt={altText} className="backgroundImage"
+        priority={lazy ? false : true} />
       )}
       {backgroundContent?.format?.includes("video/") && (
         <video className="videoWrapper" autoPlay loop muted>
