@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import ErrorComponent from "../components/ErrorComponent";
-import { fetchAndSetData, downloadData } from "../components/utils";
+import { downloadData } from "../components/utils";
 import Page from "../components/Page";
 
 export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
@@ -26,8 +25,8 @@ export async function getStaticProps() {
 
 
   let props = {
-    desktopData: await downloadData(hostConfig),
-    mobileData: null, 
+    desktopData: await downloadData(hostConfig, "desktop"),
+    mobileData: await downloadData(hostConfig, "mobile"),
     isAuthorVersion: false, 
     customHost: "https://publish-p81252-e700817.adobeaemcloud.com/", 
     fetchError: null

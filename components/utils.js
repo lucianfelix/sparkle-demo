@@ -1,5 +1,5 @@
 import AEMHeadless from '@adobe/aem-headless-client-js';
-import getLocalStaticData from './data';
+//import getLocalStaticData from './data';
 import fetch from 'node-fetch';
 
 export const scrollToId = id => {
@@ -119,7 +119,7 @@ function fetchAndSetData(hostConfig, setStates, fetchVariations) {
 
 export { fetchAndSetData };
 
-export async function downloadData(hostConfig) {
+export async function downloadData(hostConfig, variation) {
   // initializing AEM headless here for later
   
 
@@ -141,7 +141,7 @@ export async function downloadData(hostConfig) {
   // get data from AEM graphql call at endpoint, causes error if fetch fails
   const response = await aemHeadlessClient.runPersistedQuery(
     endpoint,
-    { variation: "desktop", timestamp: Date.now() },
+    { variation: variation, timestamp: Date.now() },
     { credentials: "include" }
   );
 
