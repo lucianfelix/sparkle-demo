@@ -15,6 +15,9 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Sparkle Demo</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="prefetch" href="/_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fbiker.png&w=1080&q=75" />
+        <link rel="prefetch" href="/_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Frocks1.png&w=1920&q=75" />
+        <link rel="prefetch" href="/_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Frocks3.png&w=1080&q=75" />
       </Head>
 
       <ResizeProvider>
