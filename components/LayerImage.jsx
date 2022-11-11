@@ -15,13 +15,13 @@ export default function LayerImage({ data, panelNr, host }) {
           overflow ? "showOverflow" : "hideOverflow"
         }`}
       >
-        <Image
+          <Image
           id={id}
           src={source}
           className="image"
           alt={altText?.plaintext}
-          width={image?.width}
-          height={image?.height}
+          width={image.width}
+          height={image.height}
           priority={panelNr === 0 ? true : false}
           // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
