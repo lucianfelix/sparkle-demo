@@ -15,7 +15,8 @@ export default function Background({ backgroundProps, lazy, host }) {
             height={backgroundContent.height}
             className="backgroundImage"
             //priority={lazy ? false : true}
-            priority={true}
+            priority={altText === 'sky'}
+            sizes="100vw"
             quality="90" />
       )}
       {backgroundContent?.format?.includes("video/") && (

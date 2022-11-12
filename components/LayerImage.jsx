@@ -27,9 +27,9 @@ export default function LayerImage({ data, panelNr, host }) {
               || layerId === 'layer-rocks2' 
               || layerId === 'rocks3'
               || layerId === 'biker-layer'
-              
               ? true : false}
           quality="90"
+          sizes={layerId === 'biker-layer' ? "(max-width: 840px) 100vw, 840px" : "100vw"}
           // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
       </div>
