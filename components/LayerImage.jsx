@@ -23,7 +23,13 @@ export default function LayerImage({ data, panelNr, host }) {
           width={image.width}
           height={image.height}
           //priority={panelNr === 0 ? true : false}
-          priority={layerId === 'layer-rocks1' || id=== 'biker' ? true : false}
+          priority={layerId === 'layer-rocks1' 
+              || layerId === 'layer-rocks2' 
+              || layerId === 'rocks3'
+              || layerId === 'biker-layer'
+              
+              ? true : false}
+          quality="90"
           // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
       </div>

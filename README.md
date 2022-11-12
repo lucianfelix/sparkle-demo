@@ -10,3 +10,6 @@ Note that the original uses Client Side Rendering with React. Same components ar
 
 
 See origin readme for more info.
+
+
+Using (https://ssr-sparkle-demo.vercel.app/?debugAnim=instant0 will skip the initial fade-in.

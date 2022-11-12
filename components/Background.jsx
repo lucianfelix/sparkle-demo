@@ -14,7 +14,9 @@ export default function Background({ backgroundProps, lazy, host }) {
             width={backgroundContent.width}
             height={backgroundContent.height}
             className="backgroundImage"
-            priority={lazy ? false : true} />
+            //priority={lazy ? false : true}
+            priority={true}
+            quality="90" />
       )}
       {backgroundContent?.format?.includes("video/") && (
         <video className="videoWrapper" autoPlay loop muted>
