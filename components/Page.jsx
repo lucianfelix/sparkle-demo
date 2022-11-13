@@ -107,7 +107,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host })
     data && (
       <div className={"page"} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
         <Head>
-          <title>{data?.title || "Sparkle Demo"}</title>
+          <title>{data?.title || "Sparkle SSR Demo"}</title>
           <meta name="description" content={data?.description?.plaintext} />
         </Head>
         {viewType === "mobile" && (

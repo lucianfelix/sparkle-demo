@@ -23,13 +23,17 @@ export default function LayerImage({ data, panelNr, host }) {
           width={image.width}
           height={image.height}
           //priority={panelNr === 0 ? true : false}
-          priority={layerId === 'layer-rocks1' 
-              || layerId === 'layer-rocks2' 
-              || layerId === 'rocks3'
-              || layerId === 'biker-layer'
-              ? true : false}
+          fetchpriority={layerId === 'biker-layer' ? 'high' : ''}
+          // priority={(layerId === 'layer-rocks1' && !source.includes('_m.'))
+          //     || (layerId === 'layer-rocks2'  && !source.includes('_m.'))
+          //     || (layerId === 'rocks3' && !source.includes('_m.'))
+          //     || layerId === 'biker-layer'
+          //     ? true : false}
+          priority={
+            (panelNr === 0 && !source.includes('_m.') && !source.includes('sky0.'))
+          || layerId === 'biker-layer'}
           quality="90"
-          loading={layerId === 'biker-layer' ? 'eager' : 'lazy'}
+          // loading={layerId === 'biker-layer' ? 'eager' : 'lazy'}
           sizes={
             layerId === 'biker-layer' ? "(max-width: 840px) 100vw, 40vw" : 
             layerId === 'layer-rocks1' ? "(max-width: 840px) 100vw, 70vw" : 
