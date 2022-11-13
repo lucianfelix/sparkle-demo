@@ -22,9 +22,9 @@ export default function LayerImage({ data, panelNr, host }) {
           alt={altText?.plaintext}
           width={image.width}
           height={image.height}
-          //priority={panelNr === 0 ? true : false}
+          priority={panelNr === 0 ? true : false}
           //fetchpriority={layerId === 'biker-layer' ? 'high' : ''}
-          priority={false}
+          //priority={false}
         //   priority={
         //     (panelNr === 0 && !source.includes('_m.') && !source.includes('sky0.'))
         //   //   (panelNr === 0 && !source.includes('_m.') && !source.includes('sky0.'))
@@ -40,7 +40,7 @@ export default function LayerImage({ data, panelNr, host }) {
             layerId === 'female-hiker-layer' ? "(max-width: 840px) 100vw, 30vw" :
             "100vw"
           }
-          // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
+          loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
       </div>
     </div>
