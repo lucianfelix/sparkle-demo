@@ -22,6 +22,9 @@ function MyApp({ Component, pageProps }) {
           href="/_next/static/chunks/framework-3b5a00d5d7e8d93b.js" 
           as="script"/>
 
+{/* /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=640&q=90
+/_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=750&q=90 */}
+
         {/* mobile
 
         {/*biker_m.png*/}
@@ -39,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           media="(max-width: 840px)" 
           as="image" 
           imagesrcset="/_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=640&q=90 640w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=750&q=90 750w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=828&q=90 828w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=1080&q=90 1080w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=1200&q=90 1200w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=1920&q=90 1920w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=2048&q=90 2048w, /_next/image?url=https%3A%2F%2Fpublish-p81252-e700817.adobeaemcloud.com%2F%2Fcontent%2Fdam%2Fsample-wknd-app%2Fen%2Fimage-files%2Fsky_m.jpg&w=3840&q=90 3840w" 
-          imagesizes="50vw"/>
+          imagesizes="70vw"/>
 
         {/* rocks1_m.png */}
         <link 
