@@ -5,13 +5,13 @@ import { WindowSizeProvider } from "./ResizeProvider";
 function aboveFold({ backgroundProps, panelNr, host }) {
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
 
-  return altText === 'sky' && backgroundContent?._path.includes('sky.jpg');
+  return altText === 'sky' && !backgroundContent?._path.includes('uptothesky') && (backgroundContent?._path.includes('sky.jpg') || backgroundContent?._path.includes('sky_m.jpg'));
 }
 
 function isMobileData({ backgroundProps, panelNr, host }) {
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
 
-  return backgroundContent?.type === "image" && backgroundContent?._path.includes('_m.jpg');
+  return backgroundContent?._path.includes('sky_m.jpg');
 }
 
 export default function Background(props) {
