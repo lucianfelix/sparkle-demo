@@ -1,9 +1,27 @@
 import Image from 'next/image'
+import { useContext } from "react";
+import { WindowSizeProvider } from "./ResizeProvider";
 
-export default function Background({ backgroundProps, lazy, host }) {
+function aboveFold({ backgroundProps, panelNr, host }) {
+  const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
+
+  return altText === 'sky' && backgroundContent?._path.includes('sky.jpg');
+}
+
+function isMobileData({ backgroundProps, panelNr, host }) {
+  const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
+
+  return backgroundContent?.type === "image" && backgroundContent?._path.includes('_m.jpg');
+}
+
+export default function Background(props) {
+  const { backgroundProps, panelNr, host } = props;
   const { backgroundContent, isVideo, altText, color, zIndex, type } = backgroundProps;
 
   const source = host + backgroundContent?._path;
+
+  const windowSize = useContext(WindowSizeProvider);
+  const mobileMode = windowSize.width <= 840;
 
   return (
     <div className={`backgroundWrapper ${isVideo ? "isVideo" : ""}`} style={{ backgroundColor: color, zIndex }}>
@@ -14,9 +32,9 @@ export default function Background({ backgroundProps, lazy, host }) {
             width={backgroundContent.width}
             height={backgroundContent.height}
             className="backgroundImage"
-            //priority={lazy ? false : true}
-            priority={false}
-            sizes="100vw"
+            priority={aboveFold(props) && (mobileMode === isMobileData(props))}
+            loading={aboveFold(props) && (mobileMode === isMobileData(props)) ? "eager" : "lazy"}
+            sizes="70vw"
             quality="90" />
       )}
       {backgroundContent?.format?.includes("video/") && (
