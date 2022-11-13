@@ -12,7 +12,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host })
   const [hash, setHash] = useState(null);
   const [loadRest, setLoadRest] = useState(false);
   const [ignoreHash, setIgnoreHash] = useState(false);
-  const [debugAnim, setDebugAnim] = useState(true);
+  const [debugAnim, setDebugAnim] = useState(null);
   const [forceView, setForceView] = useState(null);
 
   const handleHashUpdateEvent = e => {
