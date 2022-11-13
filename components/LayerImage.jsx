@@ -29,7 +29,15 @@ export default function LayerImage({ data, panelNr, host }) {
               || layerId === 'biker-layer'
               ? true : false}
           quality="90"
-          sizes={layerId === 'biker-layer' ? "(max-width: 840px) 100vw, 840px" : "100vw"}
+          loading={layerId === 'biker-layer' ? 'eager' : 'lazy'}
+          sizes={
+            layerId === 'biker-layer' ? "(max-width: 840px) 100vw, 40vw" : 
+            layerId === 'layer-rocks1' ? "(max-width: 840px) 100vw, 70vw" : 
+            layerId === 'layer-rocks2' ? "(max-width: 840px) 100vw, 90vw" :
+            layerId === 'rocks3' ? "(max-width: 840px) 100vw, 75vw" :
+            layerId === 'female-hiker-layer' ? "(max-width: 840px) 100vw, 30vw" :
+            "100vw"
+          }
           // loading={panelNr === 0 || forceLoad ? "eager" : "lazy"}
         />
       </div>
