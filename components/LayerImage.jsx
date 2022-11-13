@@ -24,7 +24,7 @@ export default function LayerImage({ data, panelNr, host }) {
           height={image.height}
           //priority={panelNr === 0 ? true : false}
           //fetchpriority={layerId === 'biker-layer' ? 'high' : ''}
-          priority={true}
+          priority={false}
         //   priority={
         //     (panelNr === 0 && !source.includes('_m.') && !source.includes('sky0.'))
         //   //   (panelNr === 0 && !source.includes('_m.') && !source.includes('sky0.'))
