@@ -15,7 +15,7 @@ export default function Background({ backgroundProps, lazy, host }) {
             height={backgroundContent.height}
             className="backgroundImage"
             //priority={lazy ? false : true}
-            priority={!source.includes('uptothesky') && source.includes('sky.')}
+            priority={!source.includes('uptothesky') || source.includes('sky_m.')}
             sizes="100vw"
             quality="90" />
       )}
