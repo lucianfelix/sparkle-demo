@@ -2,18 +2,18 @@ import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
 import { WindowSizeProvider } from "./ResizeProvider";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-//import dynamic from "next/dynamic";
-import MobileHeader from "./MobileHeader";
-import Panel from "./Panel";
+import dynamic from "next/dynamic";
+//import MobileHeader from "./MobileHeader";
+//import Panel from "./Panel";
 
-// const MobileHeader = dynamic(() => import('../components/MobileHeader'), {ssr: true})
-// const Panel = dynamic(() => import('../components/Panel'), {ssr: true})
+const MobileHeader = dynamic(() => import('../components/MobileHeader'), {ssr: true})
+const Panel = dynamic(() => import('../components/Panel'), {ssr: true})
 
 export default function Page({ desktopData, mobileData, isAuthorVersion, host }) {
   const [viewType, setViewType] = useState("mobile");
   const [data, setData] = useState(viewType === "mobile" ? mobileData : desktopData);
   const [hash, setHash] = useState(null);
-  const [loadRest, setLoadRest] = useState(true);
+  const [loadRest, setLoadRest] = useState(false);
   const [ignoreHash, setIgnoreHash] = useState(false);
   const [debugAnim, setDebugAnim] = useState(null);
   const [forceView, setForceView] = useState(null);

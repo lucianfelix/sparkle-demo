@@ -20,11 +20,11 @@ function MyApp({Component, pageProps}) {
                 <title>Sparkle SSG Demo</title>
                 <link rel="icon" href="/favicon.ico"/>
 
-                {/*<link*/}
-                {/*    fetchpriority="high"*/}
-                {/*    rel="preload"*/}
-                {/*    href="/_next/static/chunks/framework-3b5a00d5d7e8d93b.js"*/}
-                {/*    as="script"/>*/}
+                <link
+                    fetchpriority="high"
+                    rel="preload"
+                    href="/_next/static/chunks/framework-3b5a00d5d7e8d93b.js"
+                    as="script"/>
 
                 {/* mobile*/}
 
