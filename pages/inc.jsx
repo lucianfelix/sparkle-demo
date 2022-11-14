@@ -1,6 +1,9 @@
 import ErrorComponent from "../components/ErrorComponent";
 import { downloadData } from "../components/utils";
 import Page from "../components/Page";
+import dynamic from "next/dynamic";
+
+const PageDynamic = dynamic(() => import('../components/Page'), {ssr: true})
 
 export default function Inc({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
@@ -9,7 +12,7 @@ export default function Inc({desktopData, mobileData, isAuthorVersion, customHos
       <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
     ) : null
   ) : (
-    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+    <PageDynamic desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
   );
 }
 

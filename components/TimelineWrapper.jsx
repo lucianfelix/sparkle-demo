@@ -31,3 +31,5 @@ export const TimelineAnimationWrapper = ({ children }) => {
     </div>
   );
 };
+
+export default TimelineAnimationWrapper;

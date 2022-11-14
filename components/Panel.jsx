@@ -1,19 +1,15 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect } from "react";
-import Background from "../components/Background";
+//import Background from "../components/Background";
 import LayerImage from "../components/LayerImage";
 import TextLayer from "../components/TextLayer";
 import PointTextMap from "./PointTextMap";
-import Header from "./Header";
 import { TimelineProvider } from "./TimelineWrapper";
 import { scrollToId } from "../components/utils";
 
-const lookupObject = {
-  image: LayerImage,
-  "Image Layer": LayerImage,
-  text: TextLayer,
-  "Text Layer": TextLayer,
-  "Shoppable Moment Layer": PointTextMap,
-};
+const BackgroundDynamic = dynamic(() => import('../components/Background'))
+const HeaderDynamic = dynamic(() => import('../components/Header'))
+const LayerImageDynamic = dynamic(() => import('./LayerImage'))
 
 export default function Panel({
   panel,
@@ -27,6 +23,14 @@ export default function Panel({
   setIgnoreHash,
 }) {
   const createTimeline = useContext(TimelineProvider);
+
+  const lookupObject = {
+    image: LayerImageDynamic,
+    "Image Layer": LayerImageDynamic,
+    text: TextLayer,
+    "Text Layer": TextLayer,
+    "Shoppable Moment Layer": PointTextMap,
+  };
 
   useEffect(() => {
     if (!createTimeline) {
@@ -48,9 +52,9 @@ export default function Panel({
 
   return (
     <div className={`panel ${panel?.dark ? "darkPanel" : ""} `} id={panel.id}>
-      {settings?.viewType === "mobile" ? null : <Header isAuthorVersion={isAuthorVersion} host={host} />}
+      {settings?.viewType === "mobile" ? null : <HeaderDynamic isAuthorVersion={isAuthorVersion} host={host} />}
       {panel?.background && (
-        <Background backgroundProps={panel.background} lazy={panelNr > 0 ? true : false} host={host} />
+        <BackgroundDynamic backgroundProps={panel.background} lazy={panelNr > 0 ? true : false} host={host} />
       )}
       {(Array.isArray(panel?.layers) && panel?.layers?.length) &&
         panel.layers.map((layer, index) => {
