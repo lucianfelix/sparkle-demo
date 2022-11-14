@@ -2,7 +2,7 @@ import ErrorComponent from "../components/ErrorComponent";
 import { downloadData } from "../components/utils";
 import Page from "../components/Page";
 
-export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
+export default function Inc({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
   return !desktopData && !mobileData ? (
     fetchError ? (
@@ -33,6 +33,9 @@ export async function getStaticProps() {
   };
 
   return {
-    props: props
-  };
+    props: props,
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    revalidate: 600, // In seconds
+  }
 }
