@@ -1,15 +1,16 @@
-import dynamic from 'next/dynamic'
+//import dynamic from 'next/dynamic'
 import { useContext, useEffect } from "react";
-//import Background from "../components/Background";
 import LayerImage from "../components/LayerImage";
 import TextLayer from "../components/TextLayer";
 import PointTextMap from "./PointTextMap";
 import { TimelineProvider } from "./TimelineWrapper";
 import { scrollToId } from "../components/utils";
+import Header from "./Header";
+import Background from "./Background";
 
-const BackgroundDynamic = dynamic(() => import('../components/Background'))
-const HeaderDynamic = dynamic(() => import('../components/Header'))
-const LayerImageDynamic = dynamic(() => import('./LayerImage'))
+//const Background = dynamic(() => import('../components/Background'))
+//const Header = dynamic(() => import('../components/Header'))
+//const LayerImage = dynamic(() => import('./LayerImage'))
 
 export default function Panel({
   panel,
@@ -25,8 +26,8 @@ export default function Panel({
   const createTimeline = useContext(TimelineProvider);
 
   const lookupObject = {
-    image: LayerImageDynamic,
-    "Image Layer": LayerImageDynamic,
+    image: LayerImage,
+    "Image Layer": LayerImage,
     text: TextLayer,
     "Text Layer": TextLayer,
     "Shoppable Moment Layer": PointTextMap,
@@ -52,9 +53,9 @@ export default function Panel({
 
   return (
     <div className={`panel ${panel?.dark ? "darkPanel" : ""} `} id={panel.id}>
-      {settings?.viewType === "mobile" ? null : <HeaderDynamic isAuthorVersion={isAuthorVersion} host={host} />}
+      {settings?.viewType === "mobile" ? null : <Header isAuthorVersion={isAuthorVersion} host={host} />}
       {panel?.background && (
-        <BackgroundDynamic backgroundProps={panel.background} lazy={panelNr > 0 ? true : false} host={host} />
+        <Background backgroundProps={panel.background} lazy={panelNr > 0 ? true : false} host={host} />
       )}
       {(Array.isArray(panel?.layers) && panel?.layers?.length) &&
         panel.layers.map((layer, index) => {

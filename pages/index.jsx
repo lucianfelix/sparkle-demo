@@ -2,8 +2,9 @@ import ErrorComponent from "../components/ErrorComponent";
 //import { downloadData } from "../components/utils";
 //import Page from "../components/Page";
 import dynamic from "next/dynamic";
+import Page from "../components/Page";
 
-const PageDynamic = dynamic(() => import('../components/Page'), {ssr: true})
+//const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
 export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
@@ -12,7 +13,7 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
       <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
     ) : null
   ) : (
-    <PageDynamic desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
   );
 }
 

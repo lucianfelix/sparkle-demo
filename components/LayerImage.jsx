@@ -14,12 +14,6 @@ function isMobileData({ data, panelNr, host }) {
   return image._path.includes('_m.');
 }
 
-// function isRenderingInMobileMode({ data, panelNr, host }) {
-//   const { image, altText, layerId, id, overflow, basePosition, debug, fit, forceLoad } = data;
-
-//   return false;
-// }
-
 export default function LayerImage(props) {
   const { data, panelNr, host } = props;
   const { image, altText, layerId, id, overflow, basePosition, debug, fit, forceLoad } = data;
