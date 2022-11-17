@@ -15,7 +15,7 @@ export default function Inc({desktopData, mobileData, isAuthorVersion, customHos
     ) : null
   ) : (
     <ResizeProvider>
-    <TimelineAnimationWrapper>
+    <TimelineAnimationWrapper name={"inc"}>
       <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
     </TimelineAnimationWrapper>
   </ResizeProvider>

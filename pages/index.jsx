@@ -5,48 +5,59 @@ import dynamic from "next/dynamic";
 //import Page from "../components/Page";
 import { TimelineAnimationWrapper } from "../components/TimelineWrapper";
 import ResizeProvider from "../components/ResizeProvider";
+import { useState, useEffect } from "react";
 
 const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
 export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
+  const [onServer, setOnServer] = useState(true);
+
+  useEffect(() => {
+    setOnServer(false);
+  }, []);
 
   if (!desktopData && !mobileData) {
     if(fetchError) return <ErrorComponent error={fetchError} />
     else return <ErrorComponent error="unknown error" />
   }
 
-  const onServer = typeof window === 'undefined';
-
   if(onServer) {
+    console.log("on server");
     return (<>
-      <ResizeProvider defaultWidth={360} defaultHeight={640}>
-        <TimelineAnimationWrapper>
+            <TimelineAnimationWrapper name="desktopOnly">
+      <ResizeProvider defaultWidth={1024} defaultHeight={768}>
+
+          {/* <div>desktopOnly</div> */}
           <Page 
-            desktopData={null} 
+            desktopData={desktopData} 
+            mobileData={mobileData} 
+            isAuthorVersion={isAuthorVersion} 
+            host={customHost}
+            className="desktopOnly"/>
+      </ResizeProvider>
+      <ResizeProvider defaultWidth={360} defaultHeight={640}>
+          {/* <div>mobileOnly</div> */}
+          <Page 
+            desktopData={desktopData} 
             mobileData={mobileData} 
             isAuthorVersion={isAuthorVersion} 
             host={customHost} 
             className="mobileOnly"/>
-        </TimelineAnimationWrapper>
+
       </ResizeProvider>
-      <ResizeProvider defaultWidth={1024} defaultHeight={768}>
-        <TimelineAnimationWrapper>
-          <Page 
-            desktopData={desktopData} 
-            mobileData={null} 
-            isAuthorVersion={isAuthorVersion} 
-            host={customHost}
-            className="desktopOnly"/>
-        </TimelineAnimationWrapper>
-      </ResizeProvider>
+      </TimelineAnimationWrapper>
+
       </>)
   } else {
     return (
-      <ResizeProvider>
-        <TimelineAnimationWrapper>
+      
+        <TimelineAnimationWrapper name="dynamic">
+          <ResizeProvider>
+        {/* <div>dynamic</div> */}
           <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+          </ResizeProvider>
         </TimelineAnimationWrapper>
-      </ResizeProvider>
+      
     )
   }
 }

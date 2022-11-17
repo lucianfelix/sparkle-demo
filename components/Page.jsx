@@ -10,13 +10,16 @@ const MobileHeader = dynamic(() => import('../components/MobileHeader'), {ssr: t
 const Panel = dynamic(() => import('../components/Panel'), {ssr: true})
 
 export default function Page({ desktopData, mobileData, isAuthorVersion, host, className }) {
-  const [data, setData] = useState(null);
-  const [viewType, setViewType] = useState("desktop");
   const [hash, setHash] = useState(null);
-  const [loadRest, setLoadRest] = useState(false);
+  const [loadRest, setLoadRest] = useState(true);
   const [ignoreHash, setIgnoreHash] = useState(false);
   const [debugAnim, setDebugAnim] = useState(null);
   const [forceView, setForceView] = useState(null);
+  const windowSize = useContext(WindowSizeProvider);
+  const [viewType, setViewType] = useState(windowSize.width > 840 ? "desktop" : "mobile");
+  const [data, setData] = useState(viewType === "desktop" ? desktopData : mobileData);
+
+  //windowSize.width > 840 ? setViewType("desktop") : setViewType("mobile");
 
   const handleHashUpdateEvent = e => {
     if (e.origin !== window.location.host && e.data.type !== "hashUpdate") {
@@ -47,7 +50,8 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host, c
   }, []);
 
   // reset content on width change
-  const windowSize = useContext(WindowSizeProvider);
+
+  //console.log("Page render, window size: " + windowSize.width + "x" + windowSize.height);
   useEffect(() => {
     if (windowSize.width === null || forceView) {
       return;
@@ -107,7 +111,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host, c
   }, [viewType]);
 
   const pageClass = className ? className : "";
-
+  //console.log("Rendering for window size: " + windowSize.width + "x" + windowSize.height + " with viewType: " + viewType + " and pageClass: " + pageClass);
   return (
     data && (
       <div className={"page " + pageClass} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
@@ -127,8 +131,10 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host, c
         {data?.panels?.map &&
           data.panels.map((panel, index) => {
             if (viewType === "desktop" && index > 0 && !loadRest) {
-              document.body.style.overflowY = "scroll";
-              return null;
+              if(document) {
+                document.body.style.overflowY = "scroll";
+                return null;
+              }
             }
             return (
               <Panel

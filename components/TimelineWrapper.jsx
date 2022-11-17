@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const TimelineProvider = createContext(null);
 
-export const TimelineAnimationWrapper = ({ children }) => {
+export const TimelineAnimationWrapper = ({ children, name }) => {
   const [debugAnim, setDebugAnim] = useState(null);
   const ref = useRef();
   const q = gsap.utils.selector(ref);
@@ -26,7 +26,7 @@ export const TimelineAnimationWrapper = ({ children }) => {
   }, []);
 
   return (
-    <div className="gsapAnimationsWrapper" ref={ref}>
+    <div className="gsapAnimationsWrapper" ref={ref} id={name}>
       <TimelineProvider.Provider value={createTimeline}>{children}</TimelineProvider.Provider>
     </div>
   );
