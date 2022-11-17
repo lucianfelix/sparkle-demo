@@ -2,6 +2,8 @@ import ErrorComponent from "../components/ErrorComponent";
 import { downloadData } from "../components/utils";
 import Page from "../components/Page";
 //import dynamic from "next/dynamic";
+import { TimelineAnimationWrapper } from "../components/TimelineWrapper";
+import ResizeProvider from "../components/ResizeProvider";
 
 //const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
@@ -12,7 +14,11 @@ export default function Inc({desktopData, mobileData, isAuthorVersion, customHos
       <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
     ) : null
   ) : (
-    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+    <ResizeProvider>
+    <TimelineAnimationWrapper>
+      <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+    </TimelineAnimationWrapper>
+  </ResizeProvider>
   );
 }
 

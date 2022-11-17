@@ -90,11 +90,7 @@ function MyApp({Component, pageProps}) {
                       imageSizes="50vw"/>
             </Head>
 
-      <ResizeProvider>
-        <TimelineAnimationWrapper>
           <Component {...pageProps} />
-        </TimelineAnimationWrapper>
-      </ResizeProvider>
     </>
   );
 }

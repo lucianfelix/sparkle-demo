@@ -8,8 +8,6 @@ import ResizeProvider from "../components/ResizeProvider";
 
 const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
-
-
 export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
   if (!desktopData && !mobileData) {
@@ -21,24 +19,24 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
 
   if(onServer) {
     return (<>
-      <ResizeProvider defaultWidth={12} defaultHeight={34}>
+      <ResizeProvider defaultWidth={360} defaultHeight={640}>
         <TimelineAnimationWrapper>
-        <Page 
-          desktopData={desktopData} 
-          mobileData={mobileData} 
-          isAuthorVersion={isAuthorVersion} 
-          host={customHost} 
-          className="mobileOnly"/>
+          <Page 
+            desktopData={desktopData} 
+            mobileData={mobileData} 
+            isAuthorVersion={isAuthorVersion} 
+            host={customHost} 
+            className="mobileOnly"/>
         </TimelineAnimationWrapper>
       </ResizeProvider>
-      <ResizeProvider defaultWidth={12} defaultHeight={34}>
+      <ResizeProvider defaultWidth={1024} defaultHeight={768}>
         <TimelineAnimationWrapper>
-        <Page 
-          desktopData={desktopData} 
-          mobileData={mobileData} 
-          isAuthorVersion={isAuthorVersion} 
-          host={customHost}
-          className="desktopOnly"/>
+          <Page 
+            desktopData={desktopData} 
+            mobileData={mobileData} 
+            isAuthorVersion={isAuthorVersion} 
+            host={customHost}
+            className="desktopOnly"/>
         </TimelineAnimationWrapper>
       </ResizeProvider>
       </>)
@@ -46,7 +44,7 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
     return (
       <ResizeProvider>
         <TimelineAnimationWrapper>
-        <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+          <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
         </TimelineAnimationWrapper>
       </ResizeProvider>
     )
