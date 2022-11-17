@@ -17,6 +17,7 @@ export default function ResizeListener({ children }) {
     };
   }
 
+  
   const handleResize = debounce(() => {
     setSize({ width: window.innerWidth, height: window.innerHeight });
   }, 100);
