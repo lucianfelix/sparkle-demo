@@ -3,18 +3,54 @@ import ErrorComponent from "../components/ErrorComponent";
 //import Page from "../components/Page";
 import dynamic from "next/dynamic";
 //import Page from "../components/Page";
+import { TimelineAnimationWrapper } from "../components/TimelineWrapper";
+import ResizeProvider from "../components/ResizeProvider";
 
 const Page = dynamic(() => import('../components/Page'), {ssr: true})
 
+
+
 export default function Graphiql({desktopData, mobileData, isAuthorVersion, customHost, fetchError}) {
 
-  return !desktopData && !mobileData ? (
-    fetchError ? (
-      <ErrorComponent type={fetchError.type} url={fetchError.host} error={fetchError.error} />
-    ) : null
-  ) : (
-    <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
-  );
+  if (!desktopData && !mobileData) {
+    if(fetchError) return <ErrorComponent error={fetchError} />
+    else return <ErrorComponent error="unknown error" />
+  }
+
+  const onServer = typeof window === 'undefined';
+
+  if(onServer) {
+    return (<>
+      <ResizeProvider defaultWidth={12} defaultHeight={34}>
+        <TimelineAnimationWrapper>
+        <Page 
+          desktopData={desktopData} 
+          mobileData={mobileData} 
+          isAuthorVersion={isAuthorVersion} 
+          host={customHost} 
+          className="mobileOnly"/>
+        </TimelineAnimationWrapper>
+      </ResizeProvider>
+      <ResizeProvider defaultWidth={12} defaultHeight={34}>
+        <TimelineAnimationWrapper>
+        <Page 
+          desktopData={desktopData} 
+          mobileData={mobileData} 
+          isAuthorVersion={isAuthorVersion} 
+          host={customHost}
+          className="desktopOnly"/>
+        </TimelineAnimationWrapper>
+      </ResizeProvider>
+      </>)
+  } else {
+    return (
+      <ResizeProvider>
+        <TimelineAnimationWrapper>
+        <Page desktopData={desktopData} mobileData={mobileData} isAuthorVersion={isAuthorVersion} host={customHost} />
+        </TimelineAnimationWrapper>
+      </ResizeProvider>
+    )
+  }
 }
 
 //switch between static and server side rendering

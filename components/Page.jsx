@@ -9,9 +9,9 @@ import dynamic from "next/dynamic";
 const MobileHeader = dynamic(() => import('../components/MobileHeader'), {ssr: true})
 const Panel = dynamic(() => import('../components/Panel'), {ssr: true})
 
-export default function Page({ desktopData, mobileData, isAuthorVersion, host }) {
-  const [viewType, setViewType] = useState("mobile");
-  const [data, setData] = useState(viewType === "mobile" ? mobileData : desktopData);
+export default function Page({ desktopData, mobileData, isAuthorVersion, host, className }) {
+  const [data, setData] = useState(null);
+  const [viewType, setViewType] = useState("desktop");
   const [hash, setHash] = useState(null);
   const [loadRest, setLoadRest] = useState(false);
   const [ignoreHash, setIgnoreHash] = useState(false);
@@ -108,7 +108,7 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host })
 
   return (
     data && (
-      <div className={"page"} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
+      <div className={"page " + className} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
         <Head>
           <title>{data?.title || "Sparkle SSR Demo"}</title>
           <meta name="description" content={data?.description?.plaintext} />

@@ -2,9 +2,8 @@ import { createContext, useEffect, useState } from "react";
 
 export const WindowSizeProvider = createContext(null);
 
-export default function ResizeListener({ children }) {
-  //TODO: SSR sensible defaults
-  const [size, setSize] = useState({ width: 360, height: 640 });
+export default function ResizeListener({ defaultWidth, defaultHeight, children }) {
+  const [size, setSize] = useState({ width: defaultWidth, height: defaultHeight });
 
   // runs passed function if timeout has gone by without being called again.
   function debounce(func, wait) {
