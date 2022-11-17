@@ -22,7 +22,7 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
       <ResizeProvider defaultWidth={360} defaultHeight={640}>
         <TimelineAnimationWrapper>
           <Page 
-            desktopData={desktopData} 
+            desktopData={null} 
             mobileData={mobileData} 
             isAuthorVersion={isAuthorVersion} 
             host={customHost} 
@@ -33,7 +33,7 @@ export default function Graphiql({desktopData, mobileData, isAuthorVersion, cust
         <TimelineAnimationWrapper>
           <Page 
             desktopData={desktopData} 
-            mobileData={mobileData} 
+            mobileData={null} 
             isAuthorVersion={isAuthorVersion} 
             host={customHost}
             className="desktopOnly"/>

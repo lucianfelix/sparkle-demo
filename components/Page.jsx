@@ -106,9 +106,11 @@ export default function Page({ desktopData, mobileData, isAuthorVersion, host, c
     }
   }, [viewType]);
 
+  const pageClass = className ? className : "";
+
   return (
     data && (
-      <div className={"page " + className} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
+      <div className={"page " + pageClass} style={viewType === "mobile" ? { maxWidth: 840, margin: "0 auto" } : null}>
         <Head>
           <title>{data?.title || "Sparkle SSR Demo"}</title>
           <meta name="description" content={data?.description?.plaintext} />
